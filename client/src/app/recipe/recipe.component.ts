@@ -10,19 +10,25 @@ import { RecipeService } from './recipe.service';
 })
 export class RecipeComponent implements OnInit {
 
+  recipes: RecipeModel[];
+
+  searchbar: string = "";
+
   constructor(public rs: RecipeService) { }
 
   ngOnInit() {
   	this.getRecipes();
   }
 
-  recipes: RecipeModel[];
-
   getRecipes() {
   	this.rs.getRecipes().subscribe(
   		(data) => {
   			this.recipes = data;
   		});
+  }
+
+  clearSearch() {
+    this.searchbar = "";
   }
 
 }

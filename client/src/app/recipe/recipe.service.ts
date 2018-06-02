@@ -30,7 +30,7 @@ export class RecipeService {
   	return this.http.post(app_path + "addRecipe.php", recipe, httpOptions);
   }
 
-  bookmark(id: number, bk: number) {
+  bookmark(id: number, bk: number): Observable<any> {
   	return this.http.get(app_path + "bookmarkRecipe.php?id=" + id + "&bk=" + bk);
   }
   
