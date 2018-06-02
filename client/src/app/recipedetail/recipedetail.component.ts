@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { RecipeService } from '../recipe/recipe.service';
 import { RecipeModel } from '../recipe/recipe.model';
@@ -11,22 +12,45 @@ import { RecipeModel } from '../recipe/recipe.model';
 })
 export class RecipedetailComponent implements OnInit {
 
-  idx: number;
-  recipes: any;
+  id: number;
+  recipe: RecipeModel;
 
-  constructor( public rs: RecipeService, public route: ActivatedRoute) {
-  	this.idx = parseInt(this.route.snapshot.paramMap.get('id'));
+  pageStatus: string = "desc";
+
+  bkStatus;
+
+  constructor( public rs: RecipeService, public route: ActivatedRoute, public location: Location) {
+  	this.id = parseInt(this.route.snapshot.paramMap.get('id'));
   }
 
   ngOnInit() {
     this.getRecipes();
   }
 
-  getRecipes(){
-    this.rs.getRecipes(this.idx).subscribe(
+  goBack() {
+    this.location.back();
+  }
+
+  getRecipes() {
+    this.rs.getRecipes(this.id).subscribe(
       data => {
-        this.recipes = data;
+        this.recipe = data;
       });
+  }
+
+  getDesc() {
+    this.pageStatus = "desc";
+  }
+
+  getIngr() {
+    this.pageStatus = "ingr";
+  }
+
+  bookmark(bkCur) {
+    this.bkStatus = (bkCur == '0' ? '1' : '0');
+
+    this.rs.bookmark(this.id, parseInt(this.bkStatus)).subscribe(
+      () => {});
   }
 
 }
