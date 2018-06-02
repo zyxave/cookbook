@@ -12,4 +12,6 @@ $sqlRecipe = $conn->query("
 	WHERE id_recipe='$idRecipe'
 	");
 
+echo json_encode($bookmark);
+
 ?>

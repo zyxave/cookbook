@@ -8,6 +8,7 @@ if(!isset($_GET['id'])){
 		SELECT r.*, c.category as 'cat'
 		FROM recipe r
 		NATURAL JOIN category c
+		ORDER BY r.bookmark DESC, r.id_recipe ASC
 		");
 
 	$recipes = array();
@@ -105,7 +106,7 @@ else{
 	$recipes['ingredients'] = $ingredients;
 
 	$recipes['time'] = htmlentities($resRecipe['time']);
-	$recipes['category'] = htmlentities($resRecipe['cat']);
+	$recipes['category'] = ucwords(htmlentities($resRecipe['cat']));
 	$recipes['tags'] = $tags;
 	$recipes['bookmark'] = htmlentities($resRecipe['bookmark']);
 
