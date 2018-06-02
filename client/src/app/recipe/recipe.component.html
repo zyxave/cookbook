@@ -1,0 +1,14 @@
+<div class="row">
+
+	<div class="btn-group-vertical" style="width: 100%; margin-top: 50px;" role="group">
+		<a 
+		class="btn btn-default" 
+		*ngFor="let recipe of recipes"
+		routerLink="/recipedetail/{{recipe.id}}" 
+		style="white-space: normal;"
+		>
+			{{recipe.name}}
+		</a>
+	</div>
+
+</div>

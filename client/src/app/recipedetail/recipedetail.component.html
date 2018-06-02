@@ -1,0 +1,9 @@
+<div class="row">
+
+	<div class="btn-group-vertical" style="width: 100%; margin-top: 50px;" role="group" *ngFor="let recipe of recipes">
+		<div class="row">
+			<img src={{recipe.image}} style="width: 100px;" *ngIf="recipe.id == idx">
+		</div>
+	</div>
+
+</div>
