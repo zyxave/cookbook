@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2018 at 05:29 AM
+-- Generation Time: Jun 02, 2018 at 06:20 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.0.21
 
@@ -51,55 +51,57 @@ INSERT INTO `category` (`id_category`, `category`) VALUES
 
 CREATE TABLE `ingredient` (
   `id_recipe` int(11) NOT NULL,
-  `id_material` int(11) NOT NULL
+  `id_material` int(11) NOT NULL,
+  `listed` tinyint(1) DEFAULT NULL,
+  `bought` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ingredient`
 --
 
-INSERT INTO `ingredient` (`id_recipe`, `id_material`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 5),
-(1, 6),
-(1, 7),
-(1, 8),
-(2, 9),
-(2, 10),
-(2, 11),
-(2, 12),
-(2, 13),
-(2, 14),
-(2, 15),
-(2, 16),
-(2, 17),
-(3, 18),
-(3, 19),
-(3, 20),
-(3, 21),
-(3, 22),
-(3, 23),
-(3, 24),
-(3, 25),
-(3, 26),
-(3, 27),
-(3, 28),
-(3, 29),
-(3, 30),
-(3, 31),
-(4, 32),
-(4, 33),
-(4, 34),
-(4, 35),
-(4, 36),
-(4, 37),
-(4, 38),
-(4, 39),
-(4, 40),
-(4, 41);
+INSERT INTO `ingredient` (`id_recipe`, `id_material`, `listed`, `bought`) VALUES
+(1, 1, 0, 0),
+(1, 2, 0, 0),
+(1, 3, 0, 0),
+(1, 4, 0, 0),
+(1, 5, 0, 0),
+(1, 6, 0, 0),
+(1, 7, 0, 0),
+(1, 8, 0, 0),
+(2, 9, 0, 0),
+(2, 10, 0, 0),
+(2, 11, 0, 0),
+(2, 12, 0, 0),
+(2, 13, 0, 0),
+(2, 14, 0, 0),
+(2, 15, 0, 0),
+(2, 16, 0, 0),
+(2, 17, 0, 0),
+(3, 18, 0, 0),
+(3, 19, 0, 0),
+(3, 20, 0, 0),
+(3, 21, 0, 0),
+(3, 22, 0, 0),
+(3, 23, 0, 0),
+(3, 24, 0, 0),
+(3, 25, 0, 0),
+(3, 26, 0, 0),
+(3, 27, 0, 0),
+(3, 28, 0, 0),
+(3, 29, 0, 0),
+(3, 30, 0, 0),
+(3, 31, 0, 0),
+(4, 32, 0, 0),
+(4, 33, 0, 0),
+(4, 34, 0, 0),
+(4, 35, 0, 0),
+(4, 36, 0, 0),
+(4, 37, 0, 0),
+(4, 38, 0, 0),
+(4, 39, 0, 0),
+(4, 40, 0, 0),
+(4, 41, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -180,10 +182,10 @@ CREATE TABLE `recipe` (
 --
 
 INSERT INTO `recipe` (`id_recipe`, `name`, `time`, `desc`, `id_category`, `image`, `bookmark`) VALUES
-(1, 'Baked Ham and Cheese Party Sandwiches', '35', 'These small, delicious sandwiches are perfect for any party. They are so good that even the pickiest of eaters will eat these.', 1, 'https://images.media-allrecipes.com/userphotos/600x600/1081745.jpg', 0),
+(1, 'Baked Ham and Cheese Party Sandwiches', '35', 'These small, delicious sandwiches are perfect for any party. They are so good that even the pickiest of eaters will eat these.', 1, 'https://images.media-allrecipes.com/userphotos/600x600/1081745.jpg', 1),
 (2, 'Simple Deviled Eggs', '15', 'The eggs are delicious, and it\'s easy to make more for larger gatherings. I\'ve added onion and celery for a little more flavor and texture.', 2, 'https://images.media-allrecipes.com/userphotos/600x600/999534.jpg', 0),
 (3, 'Shrimp Scampi with Pasta', '40', 'Well-rounded seafood and pasta dish. Good with any pasta; angel hair is less filling.', 3, 'https://images.media-allrecipes.com/userphotos/600x600/2606852.jpg', 0),
-(4, 'Amaretto Dream Cupcakes', '35', 'Treat yourself to these indulgent little cupcakes laced with the irresistible flavor of Amaretto and slivered almonds.', 4, 'https://cdn3.tmbi.com/secure/RMS/attachments/37/300x300/exps3_BSF2679079C06_15_5b_RMS.jpg', 0);
+(4, 'Amaretto Dream Cupcakes', '35', 'Treat yourself to these indulgent little cupcakes laced with the irresistible flavor of Amaretto and slivered almonds.', 4, 'https://cdn3.tmbi.com/secure/RMS/attachments/37/300x300/exps3_BSF2679079C06_15_5b_RMS.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -196,6 +198,13 @@ CREATE TABLE `tag` (
   `tag` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `tag`
+--
+
+INSERT INTO `tag` (`id_tag`, `tag`) VALUES
+(1, 'pasta');
+
 -- --------------------------------------------------------
 
 --
@@ -206,6 +215,13 @@ CREATE TABLE `tags` (
   `id_recipe` int(11) NOT NULL,
   `id_tag` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`id_recipe`, `id_tag`) VALUES
+(3, 1);
 
 --
 -- Indexes for dumped tables
@@ -275,7 +291,7 @@ ALTER TABLE `recipe`
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id_tag` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tag` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
