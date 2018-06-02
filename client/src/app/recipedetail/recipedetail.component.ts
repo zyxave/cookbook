@@ -11,18 +11,22 @@ import { RecipeModel } from '../recipe/recipe.model';
 })
 export class RecipedetailComponent implements OnInit {
 
-  idx: string;
-  recipes: RecipeModel[];
+  idx: number;
+  recipes: any;
 
   constructor( public rs: RecipeService, public route: ActivatedRoute) {
-  	this.idx = this.route.snapshot.paramMap.get('id');
+  	this.idx = parseInt(this.route.snapshot.paramMap.get('id'));
   }
 
   ngOnInit() {
-  	this.rs.getRecipes().subscribe(
-  		data => {
-  			this.recipes = data;
-  		});
+    this.getRecipes();
+  }
+
+  getRecipes(){
+    this.rs.getRecipes(this.idx).subscribe(
+      data => {
+        this.recipes = data;
+      });
   }
 
 }

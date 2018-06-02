@@ -3,17 +3,33 @@
 header('Access-Control-Allow-Origin: *'); 	
 include('connection.php');
 
-$sqlRecipe = $conn->query("
-	SELECT r.*, c.category as 'cat'
-	FROM recipe r
-	NATURAL JOIN category c
-	");
+$query;
+$idRecipe;
+if($_GET['id'] == -1){
+	$query = 
+		"SELECT r.*, c.category as 'cat'
+		FROM recipe r
+		NATURAL JOIN category c";
+}
+else{
+	$idRecipe = $_GET['id'];
+
+	$query = 
+		"SELECT r.*, c.category as 'cat'
+		FROM recipe r
+		NATURAL JOIN category c
+		WHERE r.id_recipe='$idRecipe'";
+}
+
+$sqlRecipe = $conn->query($query);
 
 $recipes = array();
 $i = 0;
 while($resRecipe = $sqlRecipe->fetch_assoc()){
 	
-	$idRecipe = $resRecipe['id_recipe'];
+	if($_GET['id'] == -1){
+		$idRecipe = $resRecipe['id_recipe'];
+	}
 
 	$sqlIngredient = $conn->query("
 		SELECT m.material
@@ -45,7 +61,7 @@ while($resRecipe = $sqlRecipe->fetch_assoc()){
 	$recipes[$i]['name'] = htmlentities($resRecipe['name']);
 	$recipes[$i]['image'] = htmlentities($resRecipe['image']);
 	$recipes[$i]['desc'] = htmlentities($resRecipe['desc']);
-	$recipes[$i]['ingredient'] = $ingredients;
+	$recipes[$i]['ingredients'] = $ingredients;
 
 	$recipes[$i]['time'] = htmlentities($resRecipe['time']);
 	$recipes[$i]['category'] = htmlentities($resRecipe['cat']);

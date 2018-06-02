@@ -17,8 +17,8 @@ export class RecipeService {
 
   constructor(public http: HttpClient) { }
 
-  getRecipes(): Observable<any> {
-  	return this.http.get(app_path + "getRecipe.php");
+  getRecipes(id: number = -1): Observable<any> {
+  	return this.http.get(app_path + "getRecipe.php?id=" + id);
   }
 
   addRecipes(recipe: RecipeModel): Observable<any> {
