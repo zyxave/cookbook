@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2018 at 06:20 PM
+-- Generation Time: Jun 05, 2018 at 07:05 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.0.21
 
@@ -203,7 +203,10 @@ CREATE TABLE `tag` (
 --
 
 INSERT INTO `tag` (`id_tag`, `tag`) VALUES
-(1, 'pasta');
+(1, 'pasta'),
+(2, 'vegetarian'),
+(3, 'sweet'),
+(4, 'food');
 
 -- --------------------------------------------------------
 
@@ -221,7 +224,10 @@ CREATE TABLE `tags` (
 --
 
 INSERT INTO `tags` (`id_recipe`, `id_tag`) VALUES
-(3, 1);
+(1, 4),
+(3, 1),
+(3, 4),
+(4, 3);
 
 --
 -- Indexes for dumped tables
@@ -291,7 +297,7 @@ ALTER TABLE `recipe`
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id_tag` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tag` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
