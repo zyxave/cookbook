@@ -17,11 +17,29 @@ export class RecipeService {
 
   constructor(public http: HttpClient) { }
 
-  getRecipes(id: number = -1): Observable<any> {
-  	let path = app_path + "getRecipe.php";
-	if(id != -1){
-  		path += "?id=" + id;
-  	}
+  getRecipes(id: number = -1, filter: string = 'all', sort: string = 'none', search: string = 'none'): Observable<any> {
+  	let path = app_path + "getRecipes.php?";
+
+    if(search == 'none'){
+      if(id != -1){
+        path += "id=" + id;
+      }
+
+      if(filter != 'all'){
+        path += "filter=" + filter;
+      }
+
+      if(sort != 'none'){
+        if(path.substr((path.length - 1), 1) != '?'){
+          path += "&"
+        }
+
+        path += "sort=" + sort;
+      }
+    }
+	  else{
+      path += "search=" + search;
+    }
 
   	return this.http.get(path);
   }
@@ -32,6 +50,10 @@ export class RecipeService {
 
   bookmark(id: number, bk: number): Observable<any> {
   	return this.http.get(app_path + "bookmarkRecipe.php?id=" + id + "&bk=" + bk);
+  }
+
+  getCategories(): Observable<any> {
+    return this.http.get(app_path + "getCategories.php");
   }
   
 }

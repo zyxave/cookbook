@@ -1,19 +1,35 @@
 <div class="row">
 
 	<div class="row">
+
 		<div class="col-xs-12">
 			<div class="input-group">
-		      <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchbar">
+		      <input type="text" class="form-control" placeholder="Search... (e.g recipe name, tags)" [(ngModel)]="searchbar" (input)="searchRecipe()">
 		      <span class="input-group-btn">
 		      	<button class="btn btn-default" type="button" *ngIf="searchbar != ''" (click)="clearSearch()">
 		        	<i class="fa fa-times"></i>
 		        </button>
-		        <button class="btn btn-default" type="button">
+		        <button class="btn btn-default" type="button" disabled>
 		        	<i class="fa fa-search"></i>
 		        </button>
 		      </span>
 		    </div>
 		</div>
+
+		<div class="col-xs-6 margin-top-10">
+			<div class="dropdown">
+			  <button class="btn btn-primary dropdown-toggle width-100" type="button" id="dropdownCat" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			    <span>{{catDisplay}}</span>
+			    <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" aria-labelledby="dropdownCat">
+			  	<li (click)="changeFilter('cat', -1, 'All')"><a>All</a></li>
+			  	<li role="separator" class="divider"></li>
+	    		<li (click)="changeFilter('cat', cat?.id, cat?.category)" *ngFor="let cat of categories; let index = i"><a>{{cat?.category}}</a></li>
+			  </ul>
+			</div>
+		</div>
+
 	</div>
 
 	<div class="row">

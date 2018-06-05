@@ -50,7 +50,7 @@ export class RecipedetailComponent implements OnInit {
     this.bkStatus = (bkCur == '0' ? '1' : '0');
 
     this.rs.bookmark(this.id, parseInt(this.bkStatus)).subscribe(
-      (data) => { 
+      data => { 
         this.recipe.bookmark = data;
       });
   }

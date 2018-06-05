@@ -4,12 +4,55 @@ header('Access-Control-Allow-Origin: *');
 include('connection.php');
 
 if(!isset($_GET['id'])){
-	$sqlRecipe = $conn->query("
-		SELECT r.*, c.category as 'cat'
-		FROM recipe r
-		NATURAL JOIN category c
-		ORDER BY r.bookmark DESC, r.id_recipe ASC
-		");
+	$queryRecipe;
+
+	if(!isset($_GET['search'])){
+		$queryRecipe = "
+			SELECT r.*, c.category as 'cat'
+			FROM recipe r
+			NATURAL JOIN category c
+			";
+
+		if(isset($_GET['filter'])){
+			// e.g filter=id_category-1
+			$whereCol = explode('-', $_GET['filter'])[0];
+			$whereVal = explode('-', $_GET['filter'])[1];
+
+			$queryRecipe .= " WHERE `" . $whereCol . "`='" . $whereVal . "'";
+		}
+
+		if(isset($_GET['sort'])){
+			// e.g sort=time-asc
+			$orderCol = explode('-', $_GET['sort'])[0];
+			$orderSeq = explode('-', $_GET['sort'])[1];
+
+			$queryRecipe .= " ORDER BY `" . $orderCol . "` " . $orderSeq . ", id_recipe ASC";
+		}
+		else{
+			$queryRecipe .= " ORDER BY r.bookmark DESC, r.id_recipe ASC";
+		}
+	}
+	else{
+		$whereVal = $_GET['search'];
+
+		$queryRecipe = "
+			SELECT r.*, c.category as 'cat'
+			FROM recipe r
+			INNER JOIN
+				(SELECT DISTINCT r.name as 'name'
+					FROM recipe r
+					LEFT JOIN category c on r.id_category=c.id_category
+					LEFT JOIN tags ts on r.id_recipe=ts.id_recipe
+					LEFT JOIN tag t on ts.id_tag=t.id_tag
+			        WHERE `name` LIKE '%$whereVal%' OR `tag` LIKE '%$whereVal%') x
+			on r.name=x.name
+			NATURAL JOIN category c
+			ORDER BY r.bookmark DESC, r.id_recipe ASC
+			";
+	}
+	
+
+	$sqlRecipe = $conn->query($queryRecipe);
 
 	$recipes = array();
 	$i = 0;
