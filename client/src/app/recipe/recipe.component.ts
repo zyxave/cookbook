@@ -17,8 +17,12 @@ export class RecipeComponent implements OnInit {
 
   categories: CategoryModel[];
   catId: number = -1;
+
   catDisplay: string = "All";
-  filter: string;
+  sortDisplay: string = "None";
+
+  filter: string = 'all';
+  sort: string = 'none';
 
   constructor(public rs: RecipeService) { }
 
@@ -56,9 +60,16 @@ export class RecipeComponent implements OnInit {
         this.filter = 'id_category-' + this.catId;
       }
 
-      this.getRecipes(this.filter, 'none', 'none');
+      this.getRecipes(this.filter, this.sort, 'none');
 
     }
+  }
+
+  changeSort(sort: string, display: string) {
+    this.sort = sort;
+    this.sortDisplay = display;
+
+    this.getRecipes(this.filter, this.sort, 'none');
   }
 
   searchRecipe() {

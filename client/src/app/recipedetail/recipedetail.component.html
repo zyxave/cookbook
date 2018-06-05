@@ -11,7 +11,10 @@
 		</div>
 
 		<div class="row margin-top-10">
-			<div class="col-xs-12" style="text-align: right;">
+			<div class="col-xs-6" style="text-align: left;">
+				<i class="fa fa-cutlery"></i> <span style="font-size: 0.9em;"><b>Cook Time:</b> {{recipe?.time}} min(s)</span>
+			</div>
+			<div class="col-xs-6" style="text-align: right;">
 				<button type="button" class="btn btn-info btn-sm" [ngClass]="{'active': recipe?.bookmark == '1'}" (click)="bookmark(recipe.bookmark)"><span class="glyphicon glyphicon-bookmark"></span> Bookmark</button>
 			</div>
 			<div class="col-xs-12">

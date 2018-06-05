@@ -17,6 +17,7 @@
 		</div>
 
 		<div class="col-xs-6 margin-top-10">
+			<span style="font-size: 0.9em; color: gray;">Category:</span>
 			<div class="dropdown">
 			  <button class="btn btn-primary dropdown-toggle width-100" type="button" id="dropdownCat" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 			    <span>{{catDisplay}}</span>
@@ -26,6 +27,22 @@
 			  	<li (click)="changeFilter('cat', -1, 'All')"><a>All</a></li>
 			  	<li role="separator" class="divider"></li>
 	    		<li (click)="changeFilter('cat', cat?.id, cat?.category)" *ngFor="let cat of categories; let index = i"><a>{{cat?.category}}</a></li>
+			  </ul>
+			</div>
+		</div>
+
+		<div class="col-xs-6 margin-top-10">
+			<span style="font-size: 0.9em; color: gray;">Sort by:</span>
+			<div class="dropdown">
+			  <button class="btn btn-primary dropdown-toggle width-100" type="button" id="dropdownCat" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			    <span>{{sortDisplay}}</span>
+			    <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" aria-labelledby="dropdownCat">
+			  	<li (click)="changeSort('none','None')"><a>None</a></li>
+			  	<li role="separator" class="divider"></li>
+			  	<li (click)="changeSort('id_recipe-asc','Newest')"><a>Newest</a></li>
+			  	<li (click)="changeSort('time-asc','Fastest')"><a>Fastest</a></li>
 			  </ul>
 			</div>
 		</div>
