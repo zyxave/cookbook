@@ -1,38 +1,21 @@
 <div class="panel-group" id="accordion">
-    <div class="panel panel-default">
+  <div *ngFor="let recipe of recipes; let i = index">
+    <div class="panel panel-default" *ngIf="recipe.listed > 0">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Collapsible Group 1</a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{i+1}}">{{recipe.name}}</a>
         </h4>
       </div>
-      <div id="collapse1" class="panel-collapse collapse in">
-        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+      <div id="collapse{{i+1}}" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <div class="row">
+            <div class="btn-group-vertical col-xs-12" role="group">
+               <a (click)="bought(recipe.id,ingredient)" class="btn btn-default" style="white-space: normal; padding: 10px;" *ngFor="let ingredient of recipe.material['ingredients']; let j=index"><span *ngIf="recipe.material['bought'][j]==1"><s></span>{{ingredient}}</a>
+            </div>
+          </div>
+          <button (click)="shopDone(recipe.id)" class="btn btn-primary pull-right">DONE</button>
+        </div>
       </div>
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Collapsible Group 2</a>
-        </h4>
-      </div>
-      <div id="collapse2" class="panel-collapse collapse">
-        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Collapsible Group 3</a>
-        </h4>
-      </div>
-      <div id="collapse3" class="panel-collapse collapse">
-        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-      </div>
-    </div>
+  </div>
 </div> 
