@@ -26,7 +26,7 @@ export class RecipedetailComponent implements OnInit {
   ngOnInit() {
     this.getRecipes();
   }
-
+ 
   goBack() {
     this.location.back();
   }
@@ -53,6 +53,11 @@ export class RecipedetailComponent implements OnInit {
       data => { 
         this.recipe.bookmark = data;
       });
+  }
+
+  addShoplist()
+  {
+    this.rs.addShoplist(this.id).subscribe();
   }
 
 }

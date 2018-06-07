@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2018 at 07:05 PM
+-- Generation Time: Jun 06, 2018 at 05:27 PM
 -- Server version: 10.1.25-MariaDB
--- PHP Version: 7.0.21
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -52,7 +52,6 @@ INSERT INTO `category` (`id_category`, `category`) VALUES
 CREATE TABLE `ingredient` (
   `id_recipe` int(11) NOT NULL,
   `id_material` int(11) NOT NULL,
-  `listed` tinyint(1) DEFAULT NULL,
   `bought` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -60,48 +59,48 @@ CREATE TABLE `ingredient` (
 -- Dumping data for table `ingredient`
 --
 
-INSERT INTO `ingredient` (`id_recipe`, `id_material`, `listed`, `bought`) VALUES
-(1, 1, 0, 0),
-(1, 2, 0, 0),
-(1, 3, 0, 0),
-(1, 4, 0, 0),
-(1, 5, 0, 0),
-(1, 6, 0, 0),
-(1, 7, 0, 0),
-(1, 8, 0, 0),
-(2, 9, 0, 0),
-(2, 10, 0, 0),
-(2, 11, 0, 0),
-(2, 12, 0, 0),
-(2, 13, 0, 0),
-(2, 14, 0, 0),
-(2, 15, 0, 0),
-(2, 16, 0, 0),
-(2, 17, 0, 0),
-(3, 18, 0, 0),
-(3, 19, 0, 0),
-(3, 20, 0, 0),
-(3, 21, 0, 0),
-(3, 22, 0, 0),
-(3, 23, 0, 0),
-(3, 24, 0, 0),
-(3, 25, 0, 0),
-(3, 26, 0, 0),
-(3, 27, 0, 0),
-(3, 28, 0, 0),
-(3, 29, 0, 0),
-(3, 30, 0, 0),
-(3, 31, 0, 0),
-(4, 32, 0, 0),
-(4, 33, 0, 0),
-(4, 34, 0, 0),
-(4, 35, 0, 0),
-(4, 36, 0, 0),
-(4, 37, 0, 0),
-(4, 38, 0, 0),
-(4, 39, 0, 0),
-(4, 40, 0, 0),
-(4, 41, 0, 0);
+INSERT INTO `ingredient` (`id_recipe`, `id_material`, `bought`) VALUES
+(1, 1, 0),
+(1, 2, 0),
+(1, 3, 0),
+(1, 4, 0),
+(1, 5, 0),
+(1, 6, 0),
+(1, 7, 0),
+(1, 8, 0),
+(2, 9, 0),
+(2, 10, 0),
+(2, 11, 0),
+(2, 12, 0),
+(2, 13, 0),
+(2, 14, 0),
+(2, 15, 0),
+(2, 16, 0),
+(2, 17, 0),
+(3, 18, 0),
+(3, 19, 0),
+(3, 20, 0),
+(3, 21, 0),
+(3, 22, 0),
+(3, 23, 0),
+(3, 24, 0),
+(3, 25, 0),
+(3, 26, 0),
+(3, 27, 0),
+(3, 28, 0),
+(3, 29, 0),
+(3, 30, 0),
+(3, 31, 0),
+(4, 32, 0),
+(4, 33, 0),
+(4, 34, 0),
+(4, 35, 0),
+(4, 36, 0),
+(4, 37, 0),
+(4, 38, 0),
+(4, 39, 0),
+(4, 40, 0),
+(4, 41, 0);
 
 -- --------------------------------------------------------
 
@@ -174,18 +173,19 @@ CREATE TABLE `recipe` (
   `desc` varchar(1000) DEFAULT NULL,
   `id_category` int(11) NOT NULL,
   `image` varchar(500) DEFAULT NULL,
-  `bookmark` tinyint(1) DEFAULT NULL
+  `bookmark` tinyint(1) DEFAULT NULL,
+  `listed` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `recipe`
 --
 
-INSERT INTO `recipe` (`id_recipe`, `name`, `time`, `desc`, `id_category`, `image`, `bookmark`) VALUES
-(1, 'Baked Ham and Cheese Party Sandwiches', '35', 'These small, delicious sandwiches are perfect for any party. They are so good that even the pickiest of eaters will eat these.', 1, 'https://images.media-allrecipes.com/userphotos/600x600/1081745.jpg', 1),
-(2, 'Simple Deviled Eggs', '15', 'The eggs are delicious, and it\'s easy to make more for larger gatherings. I\'ve added onion and celery for a little more flavor and texture.', 2, 'https://images.media-allrecipes.com/userphotos/600x600/999534.jpg', 0),
-(3, 'Shrimp Scampi with Pasta', '40', 'Well-rounded seafood and pasta dish. Good with any pasta; angel hair is less filling.', 3, 'https://images.media-allrecipes.com/userphotos/600x600/2606852.jpg', 0),
-(4, 'Amaretto Dream Cupcakes', '35', 'Treat yourself to these indulgent little cupcakes laced with the irresistible flavor of Amaretto and slivered almonds.', 4, 'https://cdn3.tmbi.com/secure/RMS/attachments/37/300x300/exps3_BSF2679079C06_15_5b_RMS.jpg', 1);
+INSERT INTO `recipe` (`id_recipe`, `name`, `time`, `desc`, `id_category`, `image`, `bookmark`, `listed`) VALUES
+(1, 'Baked Ham and Cheese Party Sandwiches', '35', 'These small, delicious sandwiches are perfect for any party. They are so good that even the pickiest of eaters will eat these.', 1, 'https://images.media-allrecipes.com/userphotos/600x600/1081745.jpg', 1, 1),
+(2, 'Simple Deviled Eggs', '15', 'The eggs are delicious, and it\'s easy to make more for larger gatherings. I\'ve added onion and celery for a little more flavor and texture.', 2, 'https://images.media-allrecipes.com/userphotos/600x600/999534.jpg', 1, 0),
+(3, 'Shrimp Scampi with Pasta', '40', 'Well-rounded seafood and pasta dish. Good with any pasta; angel hair is less filling.', 3, 'https://images.media-allrecipes.com/userphotos/600x600/2606852.jpg', 0, 0),
+(4, 'Amaretto Dream Cupcakes', '35', 'Treat yourself to these indulgent little cupcakes laced with the irresistible flavor of Amaretto and slivered almonds.', 4, 'https://cdn3.tmbi.com/secure/RMS/attachments/37/300x300/exps3_BSF2679079C06_15_5b_RMS.jpg', 1, 0);
 
 -- --------------------------------------------------------
 
