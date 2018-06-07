@@ -4,16 +4,13 @@ header('Access-Control-Allow-Origin: *');
 include('connection.php');
 
 $idRecipe = $_GET['id'];
-$ingredient = $_GET['ingr'];
+$idIngredient = $_GET['ingr'];
+$bought = $_GET['bg'];
 
+$sqlBought = $conn->query("
+	UPDATE ingredient
+	SET bought='$bought'
+	WHERE id_recipe='$idRecipe' AND id_material='$idIngredient'
+	");
 
-$sql = $conn->query("SELECT id_material FROM material where material='".$ingredient."'");
-
-$idMaterial=0;
-while($res = $sql->fetch_assoc()){
-	$idMaterial= $res['id_material'];
-}
-$sql = $conn->query("UPDATE ingredient set bought=1 where id_recipe=".$idRecipe." and id_material=".$idMaterial);
-
-echo $idMaterial;
 ?>

@@ -68,17 +68,20 @@ if(!isset($_GET['id'])){
 		$idRecipe = $resRecipe['id_recipe'];
 
 		$sqlIngredient = $conn->query("
-			SELECT m.material, i.bought
+			SELECT m.*, i.bought
 			FROM material m
 			NATURAL JOIN ingredient i
 			WHERE i.id_recipe='$idRecipe'
 			");
 		$ingredients = array();
-		$bought = array();
+		// $bought = array();
 		$j = 0;
 		while($resIngredient = $sqlIngredient->fetch_assoc()){
-			$ingredients[$j] = htmlentities($resIngredient['material']);
-			$bought[$j] = htmlentities($resIngredient['bought']);
+
+			$ingredients[$j]['id'] = htmlentities($resIngredient['id_material']);
+			$ingredients[$j]['material'] = htmlentities($resIngredient['material']);
+			$ingredients[$j]['bought'] = htmlentities($resIngredient['bought']);
+			// $bought[$j] = htmlentities($resIngredient['bought']);
 			$j++;
 		}
 
@@ -99,8 +102,9 @@ if(!isset($_GET['id'])){
 		$recipes[$i]['name'] = htmlentities($resRecipe['name']);
 		$recipes[$i]['image'] = htmlentities($resRecipe['image']);
 		$recipes[$i]['desc'] = htmlentities($resRecipe['desc']);
-		$recipes[$i]['material']['ingredients'] = $ingredients;
-		$recipes[$i]['material']['bought'] = $bought;
+		$recipes[$i]['ingredients'] = $ingredients;
+		// $recipes[$i]['material']['ingredients'] = $ingredients;
+		// $recipes[$i]['material']['bought'] = $bought;
 		$recipes[$i]['listed'] = htmlentities($resRecipe['listed']);
 
 		$recipes[$i]['time'] = htmlentities($resRecipe['time']);
@@ -125,17 +129,18 @@ else{
 		");
 
 	$sqlIngredient = $conn->query("
-			SELECT m.material, i.bought
+			SELECT m.*, i.bought
 			FROM material m
 			NATURAL JOIN ingredient i
 			WHERE i.id_recipe='$idRecipe'
 			");
 	$ingredients = array();
-		$bought = array();
 	$j = 0;
 	while($resIngredient = $sqlIngredient->fetch_assoc()){
-		$ingredients[$j] = htmlentities($resIngredient['material']);
-		$bought[$j] = htmlentities($resIngredient['bought']);
+
+		$ingredients[$j]['id'] = htmlentities($resIngredient['id_material']);
+		$ingredients[$j]['material'] = htmlentities($resIngredient['material']);
+		$ingredients[$j]['bought'] = htmlentities($resIngredient['bought']);
 		$j++;
 	}
 
@@ -159,8 +164,7 @@ else{
 	$recipes['name'] = htmlentities($resRecipe['name']);
 	$recipes['image'] = htmlentities($resRecipe['image']);
 	$recipes['desc'] = htmlentities($resRecipe['desc']);
-	$recipes['material']['ingredients'] = $ingredients;
-	$recipes['material']['bought'] = $bought;
+	$recipes['ingredients'] = $ingredients;
 	$recipes['listed'] = htmlentities($resRecipe['listed']);
 
 	$recipes['time'] = htmlentities($resRecipe['time']);

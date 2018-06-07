@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2018 at 05:27 PM
+-- Generation Time: Jun 07, 2018 at 08:17 PM
 -- Server version: 10.1.25-MariaDB
--- PHP Version: 7.1.7
+-- PHP Version: 7.0.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -174,7 +174,7 @@ CREATE TABLE `recipe` (
   `id_category` int(11) NOT NULL,
   `image` varchar(500) DEFAULT NULL,
   `bookmark` tinyint(1) DEFAULT NULL,
-  `listed` tinyint(1) NOT NULL
+  `listed` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -182,8 +182,8 @@ CREATE TABLE `recipe` (
 --
 
 INSERT INTO `recipe` (`id_recipe`, `name`, `time`, `desc`, `id_category`, `image`, `bookmark`, `listed`) VALUES
-(1, 'Baked Ham and Cheese Party Sandwiches', '35', 'These small, delicious sandwiches are perfect for any party. They are so good that even the pickiest of eaters will eat these.', 1, 'https://images.media-allrecipes.com/userphotos/600x600/1081745.jpg', 1, 1),
-(2, 'Simple Deviled Eggs', '15', 'The eggs are delicious, and it\'s easy to make more for larger gatherings. I\'ve added onion and celery for a little more flavor and texture.', 2, 'https://images.media-allrecipes.com/userphotos/600x600/999534.jpg', 1, 0),
+(1, 'Baked Ham and Cheese Party Sandwiches', '35', 'These small, delicious sandwiches are perfect for any party. They are so good that even the pickiest of eaters will eat these.', 1, 'https://images.media-allrecipes.com/userphotos/600x600/1081745.jpg', 1, 0),
+(2, 'Simple Deviled Eggs', '15', 'The eggs are delicious, and it\'s easy to make more for larger gatherings. I\'ve added onion and celery for a little more flavor and texture.', 2, 'https://images.media-allrecipes.com/userphotos/600x600/999534.jpg', 0, 0),
 (3, 'Shrimp Scampi with Pasta', '40', 'Well-rounded seafood and pasta dish. Good with any pasta; angel hair is less filling.', 3, 'https://images.media-allrecipes.com/userphotos/600x600/2606852.jpg', 0, 0),
 (4, 'Amaretto Dream Cupcakes', '35', 'Treat yourself to these indulgent little cupcakes laced with the irresistible flavor of Amaretto and slivered almonds.', 4, 'https://cdn3.tmbi.com/secure/RMS/attachments/37/300x300/exps3_BSF2679079C06_15_5b_RMS.jpg', 1, 0);
 

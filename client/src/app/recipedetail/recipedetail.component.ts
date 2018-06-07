@@ -18,6 +18,7 @@ export class RecipedetailComponent implements OnInit {
   pageStatus: string = "desc";
 
   bkStatus;
+  lsStatus;
 
   constructor( public rs: RecipeService, public route: ActivatedRoute, public location: Location) {
   	this.id = parseInt(this.route.snapshot.paramMap.get('id'));
@@ -55,9 +56,14 @@ export class RecipedetailComponent implements OnInit {
       });
   }
 
-  addShoplist()
+  addShoplist(lsCur)
   {
-    this.rs.addShoplist(this.id).subscribe();
+    this.lsStatus = (lsCur == '0' ? '1' : '0')
+
+    this.rs.addShoplist(this.id, parseInt(this.lsStatus)).subscribe(
+      data => {
+        this.recipe.listed = data;
+      });
   }
 
 }

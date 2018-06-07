@@ -17,7 +17,14 @@ export class RecipeService {
   
   constructor(public http: HttpClient) { }
 
-  getRecipes(id: number = -1, filter: string = 'all', sort: string = 'none', search: string = 'none', listed:number=0): Observable<any> {
+  getRecipes(
+    id: number = -1, 
+    filter: string = 'all', 
+    sort: string = 'none', 
+    search: string = 'none', 
+    listed: number = 0
+    ): Observable<any> 
+  {
   	let path = app_path + "getRecipes.php?";
 
     if(search == 'none'){
@@ -37,7 +44,7 @@ export class RecipeService {
         path += "sort=" + sort;
       }
 
-      if(listed!=0){
+      if(listed != 0){
         path += "listed=" + listed;
       }
     }
@@ -52,23 +59,23 @@ export class RecipeService {
   	return this.http.post(app_path + "addRecipe.php", recipe, httpOptions);
   }
 
-  bookmark(id: number, bk: number): Observable<any> {
-  	return this.http.get(app_path + "bookmarkRecipe.php?id=" + id + "&bk=" + bk);
-  }
-
   getCategories(): Observable<any> {
     return this.http.get(app_path + "getCategories.php");
   }
+
+  bookmark(id: number, bk: number): Observable<any> {
+  	return this.http.get(app_path + "bookmarkRecipe.php?id=" + id + "&bk=" + bk);
+  }
   
-  addShoplist(id:number): Observable<any>{
-    return this.http.get(app_path + "addShoplist.php?id="+id);
+  addShoplist(id: number, ls: number): Observable<any> {
+    return this.http.get(app_path + "addShoplist.php?id=" + id + "&ls=" + ls);
   }
 
-  shopDone(id:number): Observable<any>{
-    return this.http.get(app_path + "shopDone.php?id="+id);
+  shopDone(id: number): Observable<any> {
+    return this.http.get(app_path + "shopDone.php?id=" + id);
   }
 
-  bought(id:number,ingr:string){
-    return this.http.get(app_path+"bought.php?id="+id+"&ingr="+ingr);
+  bought(id: number, ingr: number, bg: number): Observable<any> {
+    return this.http.get(app_path + "bought.php?id=" + id + "&ingr=" + ingr + "&bg=" + bg);
   }
 }
