@@ -11,8 +11,6 @@ export class ShoplistComponent implements OnInit {
 
   recipes: RecipeModel[];
 
-  opened: number = 1;
-
   constructor(public rs: RecipeService) { }
 
   ngOnInit() {
@@ -42,14 +40,5 @@ export class ShoplistComponent implements OnInit {
   	data => {
   		this.recipes = data;
   	});
-  }
-
-  changeCollapse(index) {
-    if(index == this.opened){
-      this.opened = -1;
-    }
-    else{
-      this.opened = index;
-    }
   }
 }
