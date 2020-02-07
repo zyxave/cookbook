@@ -26,14 +26,19 @@ export class ShoplistComponent implements OnInit {
       });
   }
 
-  bought(id, ingr, bgCur){
+  bought(id, ingr, bgCur, inner, outer){
     let bg = (bgCur == '0') ? '1' : '0';
 
-    this.rs.bought(id, ingr, parseInt(bg)).subscribe();
-    this.rs.getRecipes(-1, 'all', 'none', 'none', 1).subscribe(
-    data => {
-      this.recipes = data;
-    });
+    this.rs.bought(id, ingr, parseInt(bg)).subscribe(
+        data =>{
+          this.recipes[inner].ingredients[outer] = data;
+        }
+      );
+
+    // this.rs.getRecipes(-1, 'all', 'none', 'none', 1).subscribe(
+    // data => {
+    //   this.recipes = data;  
+    // });
   }
 
   shopDone(id:number){
